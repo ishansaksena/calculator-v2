@@ -49,6 +49,16 @@ func arrMultiply(n: [Int]) -> Int {
     return result
 }
 
+// counts the number of elements in the array
+func count(n: [Int]) -> Int {
+    return n.count
+}
+
+// Returns the average of the elements in the array
+func avg(n: [Int]) -> Int {
+    return arrAdd(n) / count(n)
+}
+
 // General math operation for array of numbers
 func mathOp(n: [Int], func op: (n: [Int]) -> Int) -> Int {
     return op(n: n)
@@ -100,11 +110,15 @@ print()
 print("Testing array operations: ")
 print("adding array [1, 2, 3, 4] is \(arrAdd([1, 2, 3, 4]))")
 print("multiplying array [1, 2, 3, 4] is \(arrMultiply([1, 2, 3, 4]))")
+print("count of array [1, 2, 3, 4] is \(count([1, 2, 3, 4]))")
+print("average of array [1, 2, 3, 4] is \(avg([1, 2, 3, 4]))")
 
 print()
 print("Testing array operations with general math op method: ")
 print("adding array [1, 2, 3, 4] with general method is \(mathOp([1, 2, 3, 4], func: arrAdd))")
 print("multiplying array [1, 2, 3, 4] with general method is \(mathOp([1, 2, 3, 4], func: arrAdd))")
+print("count of array [1, 2, 3, 4] with general method is \(mathOp([1, 2, 3, 4], func: count))")
+print("average array [1, 2, 3, 4] with general method is \(mathOp([1, 2, 3, 4], func: avg))")
 
 print()
 print("Testing point operations with tuples")
