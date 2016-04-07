@@ -33,4 +33,4 @@ handle dictionaries without "x" or "y" without crashing
 handle dictionaries with Double values without crashing
  Extra Credit
 
-rewrite the calculator using optionals
+rewritten with optionals
