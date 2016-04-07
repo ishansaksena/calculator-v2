@@ -78,18 +78,33 @@ func subtractTuples(t1: xy, t2: xy) -> xy {
 }
 
 // Operations with tuples as dictionaries
-typealias xyDict = [String: Int]
+typealias xyDict = [String: Double]
 
-func addDict(d1: xyDict, d2: xyDict) -> xyDict {
+func addDict(d1: xyDict, d2: xyDict) -> xyDict? {
+    if checkDict(d1, d2: d2) {
+        print("You're clownin'")
+        return nil
+    }
     var result = ["x" : d1["x"]! + d2["x"]!]
     result["y"] = d1["y"]! + d2["y"]!
     return result
 }
 
-func subtractDict(d1: xyDict, d2: xyDict) -> xyDict {
+func subtractDict(d1: xyDict, d2: xyDict) -> xyDict? {
+    if checkDict(d1, d2: d2) {
+        print("You done goofed!")
+        return nil
+    }
     var result = ["x" : d1["x"]! - d2["x"]!]
     result["y"] = d1["y"]! - d2["y"]!
     return result
+}
+
+func checkDict(d1: xyDict, d2: xyDict) -> Bool {
+    if d1["x"] != nil && d2["x"] != nil && d1["y"] != nil && d2["y"] != nil {
+        return false
+    }
+    return true
 }
 
 // Tests
@@ -127,6 +142,21 @@ print("Subtracting tuples(1, 2), (3, 4) is \(subtractTuples((1, 2), t2: (3, 4)))
 
 print()
 print("Testing point operations with dictionaries")
-print("Adding tuples (1, 2), (3, 4) is \(addDict(["x": 1, "y":2], d2: ["x": 3, "y":4]))")
-print("Subtracting tuples(1, 2), (3, 4) is \(subtractDict(["x": 1, "y":2], d2: ["x": 3, "y":4]))")
+print("Adding tuples (1, 2), (3, 4) is \(addDict(["x": 1, "y":2], d2: ["x": 3, "y":4])!)")
+print("Subtracting tuples(1, 2), (3, 4) is \(subtractDict(["x": 1, "y":2], d2: ["x": 3, "y":4])!)")
 
+print()
+print("Testing point operations with dictionaries, with decimals and negative numbers")
+print("Adding tuples (1.0, 2.5), (3.4, -4) is \(addDict(["x": 1.0, "y":2.5], d2: ["x": 3.9, "y":-4])!)")
+print("Subtracting tuples(1, 2), (3, 4) is \(subtractDict(["x": 1, "y":2], d2: ["x": 3, "y":4])!)")
+
+print()
+print("Testing point operations with dictionaries, with dictionaries without x or y values")
+var added: xyDict? = addDict(["x": 1.0], d2: ["x": 3.9, "y":-4])
+if (added != nil) {
+    print("Adding tuples (1.0, 2.5), (3.4, -4) is \(added)")
+}
+var subtracted: xyDict? = subtractDict(["x": 1, "y":2], d2: ["y":4])
+if (subtracted != nil) {
+    print("Subtracting tuples(1, 2), (3, 4) is \(subtracted)")
+}
